@@ -15,12 +15,12 @@ def breadth_first_search(startState, action_list, goal_test, use_closed_list=Tru
         ## this is a (state, "action") tuple
         next_state = search_queue.popleft()
         if goal_test(next_state[0]):
-            print("Goal found")
-            print(next_state)
+            #print("Goal found")
+            #print(next_state)
             ptr = next_state[0]
             while ptr is not None :
                 ptr = ptr.prev
-                print(ptr)
+                #print(ptr)
             return next_state
         else :
             successors = next_state[0].successors(action_list)
@@ -39,6 +39,7 @@ def depth_first_search(startState, action_list, goal_test, use_closed_list=True,
     search_queue = deque()
     closed_list = {}
     num_states_generated = 0
+    depth = 0
 
     search_queue.append((startState,""))
     if use_closed_list :
@@ -47,20 +48,22 @@ def depth_first_search(startState, action_list, goal_test, use_closed_list=True,
         ## this is a (state, "action") tuple
         next_state = search_queue.pop()
         if goal_test(next_state[0]):
-            print("Goal found")
-            print(next_state)
+            #print("Goal found")
+            #print(next_state)
             ptr = next_state[0]
             while ptr is not None :
                 ptr = ptr.prev
-                print(ptr)
+                #print(ptr)
             return next_state
         else :
-            successors = next_state[0].successors(action_list)
-            if use_closed_list :
-                successors = [item for item in successors
-                                    if item[0] not in closed_list]
-                for s in successors :
-                    closed_list[s[0]] = True
-                    num_states_generated += 1
-            search_queue.extend(successors)
+            if depth < limit or limit == 0 :
+                depth += 1
+                successors = next_state[0].successors(action_list)
+                if use_closed_list :
+                    successors = [item for item in successors
+                                        if item[0] not in closed_list]
+                    for s in successors :
+                        closed_list[s[0]] = True
+                        num_states_generated += 1
+                search_queue.extend(successors)
 
