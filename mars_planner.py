@@ -26,7 +26,12 @@ class RoverState :
 
     ## you do this.
     def __eq__(self, other):
-       pass
+        return (
+            self.loc == other.loc 
+            and self.sample_extracted == other.sample_extracted
+            and self.holding_sample == other.holding_sample
+            and self.charged == other.charged
+       )
 
 
     def __repr__(self):
@@ -100,7 +105,12 @@ def battery_goal(state) :
 ## add your goals here.
 
 def mission_complete(state) :
-    pass
+    return (
+        battery_goal(state) 
+        and state.charged
+        and state.sample_extracted 
+        and state.holding_sample == False
+    )
 
 
 if __name__=="__main__" :

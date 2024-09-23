@@ -6,6 +6,7 @@ from collections import deque
 def breadth_first_search(startState, action_list, goal_test, use_closed_list=True) :
     search_queue = deque()
     closed_list = {}
+    num_states_generated = 0
 
     search_queue.append((startState,""))
     if use_closed_list :
@@ -28,6 +29,7 @@ def breadth_first_search(startState, action_list, goal_test, use_closed_list=Tru
                                     if item[0] not in closed_list]
                 for s in successors :
                     closed_list[s[0]] = True
+                    num_states_generated += 1
             search_queue.extend(successors)
 
 ### Note the similarity to BFS - the only difference is the search queue
@@ -36,6 +38,7 @@ def breadth_first_search(startState, action_list, goal_test, use_closed_list=Tru
 def depth_first_search(startState, action_list, goal_test, use_closed_list=True,limit=0) :
     search_queue = deque()
     closed_list = {}
+    num_states_generated = 0
 
     search_queue.append((startState,""))
     if use_closed_list :
@@ -58,10 +61,6 @@ def depth_first_search(startState, action_list, goal_test, use_closed_list=True,
                                     if item[0] not in closed_list]
                 for s in successors :
                     closed_list[s[0]] = True
+                    num_states_generated += 1
             search_queue.extend(successors)
 
-## add iterative deepening search here
-
-
-
-f
