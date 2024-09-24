@@ -41,5 +41,11 @@ class Graph :
     def get_edges(self, src):
         if src in self.g:
             return self.g[src]
-
+        
+    def print(self):
+        # Go through each node and its edges
+        for node, edges in self.g.items():
+            print(f"Node {node}:")
+            for edge in edges:
+                print(f"  Edge to {edge.dest}")
 
