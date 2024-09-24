@@ -14,7 +14,7 @@
 ## Charged can be True or False
 
 from copy import deepcopy
-from search_algorithms import breadth_first_search
+from search_algorithms import breadth_first_search, depth_first_search
 
 class RoverState :
     def __init__(self, loc="station", sample_extracted=False, holding_sample=False, charged=False, holding_tool=False):
@@ -120,7 +120,8 @@ def charge(state) :
 
 
 action_list = [charge, drop_sample, pick_up_sample,
-               move_to_sample, move_to_battery, move_to_station]
+               move_to_sample, move_to_battery, move_to_station, 
+               pick_up_tool, drop_tool, use_tool]
 
 def battery_goal(state) :
     return state.loc == "battery"
@@ -136,9 +137,20 @@ def mission_complete(state) :
 
 
 if __name__=="__main__" :
-    s = RoverState()
-    result = breadth_first_search(s, action_list, mission_complete)
-    print(result)
+    #BFS
+    s1 = RoverState()
+    result1 = breadth_first_search(s1, action_list, mission_complete)
+    print(result1)
+
+    #DFS
+    s2 = RoverState()
+    result2 = depth_first_search(s2, action_list, mission_complete)
+    print(result2)
+    
+    #DLS
+    s3 = RoverState()
+    result3 = depth_first_search(s3, action_list, mission_complete, 10)
+    print(result3)
 
 
 

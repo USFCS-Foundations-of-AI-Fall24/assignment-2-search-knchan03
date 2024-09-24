@@ -21,6 +21,7 @@ def breadth_first_search(startState, action_list, goal_test, use_closed_list=Tru
             while ptr is not None :
                 ptr = ptr.prev
                 #print(ptr)
+            print("Number of states generated: ", num_states_generated)
             return next_state
         else :
             successors = next_state[0].successors(action_list)
@@ -54,6 +55,7 @@ def depth_first_search(startState, action_list, goal_test, use_closed_list=True,
             while ptr is not None :
                 ptr = ptr.prev
                 #print(ptr)
+            print("Number of states generated: ", num_states_generated)
             return next_state
         else :
             if depth < limit or limit == 0 :
