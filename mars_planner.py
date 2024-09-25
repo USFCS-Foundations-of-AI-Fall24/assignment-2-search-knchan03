@@ -41,7 +41,7 @@ class RoverState :
                 f"Sample Extracted?: {self.sample_extracted}\n"+
                 f"Holding Sample?: {self.holding_sample}\n" +
                 f"Charged? {self.charged}\n" +
-                f"Holding Tool? {self.holding_tool}")
+                f"Holding Tool? {self.holding_tool}\n")
 
     def __hash__(self):
         return self.__repr__().__hash__()
@@ -126,6 +126,15 @@ action_list = [charge, drop_sample, pick_up_sample,
 def battery_goal(state) :
     return state.loc == "battery"
 ## add your goals here.
+
+def move_to_sample_goal(state) :
+    return state.loc == "sample"
+
+def remove_sample_goal(state):
+    return state.sample_extracted and state.holding_sample
+
+def return_to_charger_goal(state):
+    return state.loc == "battery" and state.charged and state.sample_extracted and not state.holding_sample
 
 def mission_complete(state) :
     return (

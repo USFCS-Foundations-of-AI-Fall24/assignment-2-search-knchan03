@@ -4,25 +4,30 @@ from search_algorithms import *
 
 
 if __name__=="__main__" :
-    print("Mars Planner Tests\n")
-    #BFS
+
+    print("Testing Mars Planner...\n")
+    #move to sample
     print("Running BFS...")
-    s1 = RoverState()
-    result1 = breadth_first_search(s1, action_list, mission_complete)
-    print(result1, "\n")
+    s1 = RoverState()  # Initial state at the station
+    result1_bfs = breadth_first_search(s1, action_list, move_to_sample_goal)
+    result1_dfs = depth_first_search(s1, action_list, move_to_sample_goal)
+    result1_dls = depth_first_search(s1, action_list, move_to_sample_goal, 10)
+    print("BFS: ", result1_bfs, "DFS: ", result1_dfs, "DLS with limit 10: ", result1_dls)
 
-    #DFS
-    print("Running DFS...")
+    #remove sample
     s2 = RoverState()
-    result2 = depth_first_search(s2, action_list, mission_complete)
-    print(result2, "\n")
+    result2_bfs = breadth_first_search(s2, action_list, remove_sample_goal)
+    result2_dfs = depth_first_search(s2, action_list, remove_sample_goal)
+    result2_dls = depth_first_search(s2, action_list, remove_sample_goal, 10)
+    print("BFS: ", result2_bfs, "DFS: ", result2_dfs, "DLS with limit 10: ", result2_dls)
     
-    #DLS
-    print("Running DLS with depth limit of 10...")
+    #return to charger
     s3 = RoverState()
-    result3 = depth_first_search(s3, action_list, mission_complete, 10)
-    print(result3, "\n")
-
+    result3_bfs = breadth_first_search(s3, action_list, return_to_charger_goal)
+    result3_dfs = depth_first_search(s3, action_list, return_to_charger_goal)
+    result3_dls = depth_first_search(s3, action_list, return_to_charger_goal, 10)
+    print("BFS: ", result3_bfs, "DFS: ", result3_dfs, "DLS with limit 10: ", result3_dls)
+    
     print("--------------------------------------------------------\nRoute Finder Tests\n")
     print("Testing Read Graph...\n")
     mars_graph = read_mars_graph("MarsMap.txt")
