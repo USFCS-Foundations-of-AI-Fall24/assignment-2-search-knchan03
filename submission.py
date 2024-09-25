@@ -1,5 +1,5 @@
 from mars_planner import *
-from routefinder import read_mars_graph
+from routefinder import a_star, h1, map_state, read_mars_graph, sld
 from search_algorithms import *
 
 
@@ -32,3 +32,32 @@ if __name__=="__main__" :
     print("Testing Read Graph...\n")
     mars_graph = read_mars_graph("MarsMap.txt")
     mars_graph.print()
+
+    print("\nTesting A* with \"8,8\" as start location...\n")
+    start_state = map_state(location="8,8", mars_graph=mars_graph)
+    astar_result = a_star(start_state, sld, map_state.is_goal)
+    if astar_result:
+        path = []
+        state = astar_result
+        while state is not None:
+            path.append(state)
+            state = state.prev_state
+        path.reverse()
+        for state in path:
+            print(state.location)
+    else:
+        print("No path found")
+
+    print("\nTesting UCS with \"8,8\" as start location...\n")
+    ucs_result = a_star(start_state, h1, map_state.is_goal)
+    if ucs_result:
+        path = []
+        state = ucs_result
+        while state is not None:
+            path.append(state)
+            state = state.prev_state
+        path.reverse()
+        for state in path:
+            print(state.location)
+    else:
+        print("No path found")
