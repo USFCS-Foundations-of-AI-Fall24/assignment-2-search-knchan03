@@ -1,0 +1,38 @@
+Assignment 2 comments:
+
+Question 1: Algorithms. 10/10
+
+Question 2:
+
+eq: 5/5
+
+goal: 5/5
+
+BFS/DFS: 5/5
+
+DLS: 7/10 - you're incrementing depth each time you dequeue, which will yield
+an inaccurate result. Better to make it a member variable and then 
+depth=parent.depth + 1
+
+tools: 10/10
+
+decomposition: 10/10
+
+Question 3:
+
+read_mars_graph: 5/5
+
+A*: 15/15
+
+count states: 5/5
+
+Question 4: 0/10 - I don't see this part.
+
+Question 5: 10/10 - AlphaZero also learns an extremely accurate heuristic
+function.
+
+87/100
+
+
+
+
